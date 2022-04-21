@@ -1,8 +1,11 @@
 import numpy as np
 import random
 
-d = 1000
-instances = 5000
+d = 10000  # Dimension of data
+m = 50  # Number of datasets
+n = 100  # Number of data points in each dataset
+
+instances = m * n
 
 mean = list(10 * np.random.rand(d))
 A = np.random.rand(d, d)
@@ -27,32 +30,32 @@ full_data = np.concatenate((X, Y), axis=1)
 
 np_params = []
 
-X_train = X[0:1000]
-Y_train = Y[0:1000]
+# X_train = X[0:1000]
+# Y_train = Y[0:1000]
+#
+# X_test = X[1000:2000]
+# Y_test = Y[1000:2000]
+#
+# print(X_train.shape)
+# print(Y_train.shape)
+#
+# lam = 0
+# theta_star = np.dot(np.linalg.inv(np.dot(X_train.T, X_train) + lam * np.identity(d)), np.dot(X_train.T, Y_train))
+#
+# Y_pred = np.dot(X_test, theta_star)
+#
+#
+# nrmse = np.sqrt(np.linalg.norm(Y_test - Y_pred, 2)**2 / 1000) / np.std(Y_test)
+# print(nrmse)
 
-X_test = X[1000:2000]
-Y_test = Y[1000:2000]
+# print(random.random())
+# print(random.random())
+# print(random.random())
+# print(random.random())
+# print(random.random())
+# print(random.random())
 
-print(X_train.shape)
-print(Y_train.shape)
-
-lam = 0
-theta_star = np.dot(np.linalg.inv(np.dot(X_train.T, X_train) + lam * np.identity(1000)), np.dot(X_train.T, Y_train))
-
-Y_pred = np.dot(X_test, theta_star)
-
-
-nrmse = np.sqrt(np.linalg.norm(Y_test - Y_pred, 2)**2 / 1000) / np.std(Y_test)
-print(nrmse)
-
-print(random.random())
-print(random.random())
-print(random.random())
-print(random.random())
-print(random.random())
-print(random.random())
-
-for i in range(10):
+for i in range(m):
     # Dataset i
     a_i = 10 * random.random()
     b_i = 10 * random.random()
@@ -60,8 +63,8 @@ for i in range(10):
 
     np_params.append([a_i, b_i, c_i])
 
-    begin = int(i * instances / 10)
-    end = int((i+1) * instances / 10)
+    begin = int(i * instances / m)
+    end = int((i+1) * instances / m)
     data_i = full_data[begin:end, :]
 
     name = "original_data_y_transformed" + str(i+1) + '.csv'
